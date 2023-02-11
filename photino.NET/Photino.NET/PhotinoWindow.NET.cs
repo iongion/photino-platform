@@ -1316,7 +1316,7 @@ public partial class PhotinoWindow
         Console.WriteLine($"Photino.NET: \"{Title ?? "PhotinoWindow"}\"{message}");
     }
 
-    public void DisableTLSCheck()
+    public PhotinoWindow DisableTLSCheck()
     {
         try
         {
@@ -1330,5 +1330,6 @@ public partial class PhotinoWindow
             Log($"***\n{ex.Message}\n{ex.StackTrace}\nError #{lastError}");
             throw new ApplicationException($"Native code exception. Error # {lastError}  See inner exception for details.", ex);
         }
+        return this;
     }
 }
