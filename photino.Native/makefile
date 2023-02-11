@@ -28,7 +28,7 @@ linux: clean build-photino-linux
 
 windows-dev: clean-dev build-photino-windows
 mac-dev: clean-dev build-photino-mac-dev
-linux-dev: clean-dev install-linux-dependencies.$(OS) build-photino-linux-dev
+linux-dev: clean-dev build-photino-linux-dev
 
 build-photino-windows:
 	# "build-photino-windows is not defined"
