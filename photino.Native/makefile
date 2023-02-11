@@ -14,8 +14,13 @@ DEST_PATH_PROD=$(DEST_PATH)/prod
 DEST_PATH_DEV=$(DEST_PATH)/dev
 DEST_FILE=Photino.Native
 
+OS=$(shell lsb_release -si)
+ARCH=$(shell uname -m | sed 's/x86_//;s/i[3-6]86/32/')
+VER=$(shell lsb_release -sr)
+
 all:
-	# "make all is unavailable, use [windows|mac|linux](-dev)."
+	@echo "make all is unavailable, use [windows|mac|linux](-dev)"
+	@echo "Current platform - OS=$(OS) ARCH=$(ARCH) VER=$(VER)"
 
 windows: clean build-photino-windows
 mac: clean build-photino-mac
@@ -23,7 +28,7 @@ linux: clean build-photino-linux
 
 windows-dev: clean-dev build-photino-windows
 mac-dev: clean-dev build-photino-mac-dev
-linux-dev: clean-dev install-linux-dependencies build-photino-linux-dev
+linux-dev: clean-dev install-linux-dependencies.$(OS) build-photino-linux-dev
 
 build-photino-windows:
 	# "build-photino-windows is not defined"
@@ -49,9 +54,11 @@ build-photino-mac-dev:
 		  $(SRC)/Exports.mm &&\
 	rm $(SRC)/Exports.mm
 
-install-linux-dependencies:
-	sudo apt-get update\
-	&& sudo apt-get install libgtk-3-dev libwebkit2gtk-4.0-dev libnotify4 libnotify-dev
+install-linux-dependencies.Ubuntu:
+	sudo apt-get update && sudo apt-get install libgtk-3-dev libwebkit2gtk-4.0-dev libnotify4 libnotify-dev
+
+install-linux-dependencies.ManjaroLinux:
+	sudo pacman -S extra/gtk3 extra/webkit2gtk-4.1 extra/libnotify
 
 build-photino-linux:
 	# "build-photino-linux is not defined"
