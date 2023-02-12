@@ -59,10 +59,9 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-
   </Target>
   
-    <ItemGroup>
+  <ItemGroup>
     <Content Include="$(ProjectDir)..\photino.Native\Photino.Native\$(Platform)\$(Configuration)\Photino.Native.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -74,9 +73,9 @@
     </Content>
   </ItemGroup>
   
-    <ItemGroup>
-      <ProjectReference Include="..\photino.Native\Photino.Native\Photino.Native.vcxproj" />
-    </ItemGroup>
+  <ItemGroup Condition="'$(IsWindows)'=='true'">
+    <ProjectReference Include="..\photino.Native\Photino.Native\Photino.Native.vcxproj" />
+  </ItemGroup>
 
 
 </Project>
