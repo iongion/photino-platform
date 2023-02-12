@@ -9,6 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Photino.NET", "photino.NET\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Photino.Test", "photino.Test\Photino.Test.csproj", "{6CBB8545-E9A3-4A87-AC1F-AD5BCFBF1AE3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4A556935-2718-4AE7-9827-70020BF8660F}"
+	ProjectSection(SolutionItems) = preProject
+		Makefile = Makefile
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,16 +32,16 @@ Global
 		{B326B50A-F623-40F1-92F7-1EC6A5A48DAC}.Debug|ARM64.Build.0 = Debug|ARM64
 		{B326B50A-F623-40F1-92F7-1EC6A5A48DAC}.Debug|x64.ActiveCfg = Debug|x64
 		{B326B50A-F623-40F1-92F7-1EC6A5A48DAC}.Debug|x64.Build.0 = Debug|x64
-		{B326B50A-F623-40F1-92F7-1EC6A5A48DAC}.Debug|x86.ActiveCfg = Debug|Win32
-		{B326B50A-F623-40F1-92F7-1EC6A5A48DAC}.Debug|x86.Build.0 = Debug|Win32
+		{B326B50A-F623-40F1-92F7-1EC6A5A48DAC}.Debug|x86.ActiveCfg = Debug|x86
+		{B326B50A-F623-40F1-92F7-1EC6A5A48DAC}.Debug|x86.Build.0 = Debug|x86
 		{B326B50A-F623-40F1-92F7-1EC6A5A48DAC}.Release|Any CPU.ActiveCfg = Release|x64
 		{B326B50A-F623-40F1-92F7-1EC6A5A48DAC}.Release|Any CPU.Build.0 = Release|x64
 		{B326B50A-F623-40F1-92F7-1EC6A5A48DAC}.Release|ARM64.ActiveCfg = Release|ARM64
 		{B326B50A-F623-40F1-92F7-1EC6A5A48DAC}.Release|ARM64.Build.0 = Release|ARM64
 		{B326B50A-F623-40F1-92F7-1EC6A5A48DAC}.Release|x64.ActiveCfg = Release|x64
 		{B326B50A-F623-40F1-92F7-1EC6A5A48DAC}.Release|x64.Build.0 = Release|x64
-		{B326B50A-F623-40F1-92F7-1EC6A5A48DAC}.Release|x86.ActiveCfg = Release|Win32
-		{B326B50A-F623-40F1-92F7-1EC6A5A48DAC}.Release|x86.Build.0 = Release|Win32
+		{B326B50A-F623-40F1-92F7-1EC6A5A48DAC}.Release|x86.ActiveCfg = Release|x86
+		{B326B50A-F623-40F1-92F7-1EC6A5A48DAC}.Release|x86.Build.0 = Release|x86
 		{96F6CBA4-491A-4BF0-817D-B9C6BE0E6F52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{96F6CBA4-491A-4BF0-817D-B9C6BE0E6F52}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96F6CBA4-491A-4BF0-817D-B9C6BE0E6F52}.Debug|ARM64.ActiveCfg = Debug|Any CPU
