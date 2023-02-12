@@ -178,6 +178,9 @@ Photino::Photino(PhotinoInitParams* initParams) : _webview(nullptr)
 	if (initParams->Topmost)
 		Photino::SetTopmost(true);
 
+  if (!initParams->TSLCheckEnabled)
+    Photino::SetTLSCheckEnabled(false);
+
 	if (_parent == NULL)
 	{
 		g_signal_connect(G_OBJECT(_window), "destroy",

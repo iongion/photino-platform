@@ -8,7 +8,7 @@
     <IsWindows Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::Windows)))' == 'true'">true</IsWindows>
     <IsOSX Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::OSX)))' == 'true'">true</IsOSX>
     <IsLinux Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::Linux)))' == 'true'">true</IsLinux>
-    <Platforms>AnyCPU;x64;x86;ARM64</Platforms>
+    <Platforms>x64;x86;ARM64</Platforms>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(IsWindows)'=='true'">
@@ -21,14 +21,10 @@
     <DefineConstants>Linux</DefineConstants>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-  </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
-  
+
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
@@ -60,19 +56,19 @@
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
   </Target>
-  
+
   <ItemGroup>
-    <Content Include="$(ProjectDir)..\photino.Native\Photino.Native\$(Platform)\$(Configuration)\Photino.Native.dll">
+    <Content Include="$(ProjectDir)..\photino.Native\Photino.Native\$(Platform)\$(Configuration)\Photino.Native.dll" Condition="'$(IsWindows)'=='true'">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="$(ProjectDir)..\photino.Native\Photino.Native\$(Platform)\$(Configuration)\Photino.Native.so" Condition="'$(IsLinux)'=='true'">
+    <Content Include="$(ProjectDir)..\photino.Native\lib\dev\Photino.Native.so" Condition="'$(IsLinux)'=='true'">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="$(ProjectDir)..\photino.Native\Photino.Native\$(Platform)\$(Configuration)\WebView2Loader.dll">
+    <Content Include="$(ProjectDir)..\photino.Native\Photino.Native\$(Platform)\$(Configuration)\WebView2Loader.dll" Condition="'$(IsWindows)'=='true'">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  
+
   <ItemGroup Condition="'$(IsWindows)'=='true'">
     <ProjectReference Include="..\photino.Native\Photino.Native\Photino.Native.vcxproj" />
   </ItemGroup>

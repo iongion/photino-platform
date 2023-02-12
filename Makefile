@@ -9,14 +9,12 @@ build-photino-native:
 	cd photino.Native && make linux-dev
 
 build-photino-net:
-	cd photino.NET && dotnet build Photino.NET.sln
+	cd photino.NET && dotnet build Photino.NET.sln -c Release /p:Platform=x64
 
 build-photino-test:
-	cd photino.Test && dotnet build Photino.Test.csproj
+	cd photino.Test && dotnet build Photino.Test.csproj -c Release /p:Platform=x64
 
-run-photino-test: build-photino-test
-	cp ./photino.Native/lib/dev/Photino.Native.so ./photino.Test/bin/Debug/net6.0 \
-		&& cd photino.Test \
-		&& dotnet run Photino.Test.csproj
+run-photino-test: build-photino-native build-photino-test
+	cd photino.Test && dotnet run Photino.Test.csproj -c Release /p:Platform=x64
 
 all: build-photino-native
