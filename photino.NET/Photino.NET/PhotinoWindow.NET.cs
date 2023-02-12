@@ -18,6 +18,7 @@ public partial class PhotinoWindow
         CustomSchemeNamesWide = new string[16],
         CustomSchemeNames = new string[16],
         DevToolsEnabled = true,
+        TLSCheckEnabled = true,
         GrantBrowserPermissions = true,
         TemporaryFilesPathWide = IsWindowsPlatform
             ? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Photino")
@@ -203,6 +204,30 @@ public partial class PhotinoWindow
                     _startupParameters.DevToolsEnabled = value;
                 else
                     Invoke(() => Photino_SetDevToolsEnabled(_nativeInstance, value));
+            }
+        }
+    }
+
+    ///<summary>When true, the brower validates SSL certificates. Default is true.</summary>
+    public bool TLSCheckEnabled
+    {
+        get
+        {
+            if (_nativeInstance == IntPtr.Zero)
+                return _startupParameters.TLSCheckEnabled;
+
+            var enabled = false;
+            Invoke(() => Photino_GetTLSCheckEnabled(_nativeInstance, out enabled));
+            return enabled;
+        }
+        set
+        {
+            if (TLSCheckEnabled != value)
+            {
+                if (_nativeInstance == IntPtr.Zero)
+                    _startupParameters.TLSCheckEnabled = value;
+                else
+                    Invoke(() => Photino_SetTLSCheckEnabled(_nativeInstance, value));
             }
         }
     }
@@ -1025,6 +1050,13 @@ public partial class PhotinoWindow
         return this;
     }
 
+    public PhotinoWindow SetTLSCheckEnabled(bool enabled)
+    {
+        Log($".SetTLSCheckEnabled({enabled})");
+        TLSCheckEnabled = enabled;
+        return this;
+    }
+
     ///<summary>When true, the native window will cover the entire screen area - kiosk style. Default is false.</summary>
     public PhotinoWindow SetFullScreen(bool fullScreen)
     {
@@ -1314,22 +1346,5 @@ public partial class PhotinoWindow
     {
         if (LogVerbosity < 1) return;
         Console.WriteLine($"Photino.NET: \"{Title ?? "PhotinoWindow"}\"{message}");
-    }
-
-    public PhotinoWindow DisableTLSCheck()
-    {
-        try
-        {
-            Invoke(() => Photino_DisableTLSCheck(_nativeInstance));
-        }
-        catch (Exception ex)
-        {
-            int lastError = 0;
-            if (IsWindowsPlatform)
-                lastError = Marshal.GetLastWin32Error();
-            Log($"***\n{ex.Message}\n{ex.StackTrace}\nError #{lastError}");
-            throw new ApplicationException($"Native code exception. Error # {lastError}  See inner exception for details.", ex);
-        }
-        return this;
     }
 }

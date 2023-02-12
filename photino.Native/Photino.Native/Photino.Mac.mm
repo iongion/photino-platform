@@ -75,6 +75,7 @@ Photino::Photino(PhotinoInitParams* initParams)
 
 	_contextMenuEnabled = true; //not configurable on mac //initParams->ContextMenuEnabled;
 	_devToolsEnabled = initParams->DevToolsEnabled;
+    _tlsCheckEnabled = initParams->TLSCheckEnabled;
 	_grantBrowserPermissions = initParams->GrantBrowserPermissions;
 
 	_zoom = initParams->Zoom;
@@ -249,6 +250,11 @@ void Photino::GetDevToolsEnabled(bool* enabled)
     *enabled = _devToolsEnabled;
 }
 
+void Photino::GetTLSCheckEnabled(bool* enabled)
+{
+    *enabled = _tlsCheckEnabled;
+}
+
 void Photino::GetFullScreen(bool* fullScreen)
 {
     *fullScreen = ([_window.contentView isInFullScreenMode]);
@@ -384,6 +390,11 @@ void Photino::SetDevToolsEnabled(bool enabled)
     //Can't be changed after initialization on mac
     //_devToolsEnabled = enabled;
     //[_webview configuration: preferences: enableDevExtras: YES];
+}
+
+void Photino::SetTLSCheckEnabled(bool enabled)
+{
+    _tlsCheckEnabled = enabled;
 }
 
 void Photino::SetFullScreen(bool fullScreen)

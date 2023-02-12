@@ -150,6 +150,11 @@ extern "C"
 		instance->SetDevToolsEnabled(enabled);
 	}
 
+	EXPORTED void Photino_SetTLSCheckEnabled(Photino* instance, bool enabled)
+	{
+		instance->SetTLSCheckEnabled(enabled);
+	}
+
 	EXPORTED void Photino_SetFullScreen(Photino* instance, bool fullScreen)
 	{
 		instance->SetFullScreen(fullScreen);
@@ -219,12 +224,6 @@ extern "C"
 	{
 		instance->WaitForExit();
 	}
-
-	EXPORTED void Photino_DisableTLSCheck(Photino* instance)
-	{
-		instance->DisableTLSCheck();
-	}
-
 
 
 	//Callbacks

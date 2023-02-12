@@ -127,6 +127,7 @@ Photino::Photino(PhotinoInitParams* initParams)
 
 	_contextMenuEnabled = initParams->ContextMenuEnabled;
 	_devToolsEnabled = initParams->DevToolsEnabled;
+	_tlsCheckEnabled = initParams->TSLCheckEnabled;
 	_grantBrowserPermissions = initParams->GrantBrowserPermissions;
 
 	_zoom = initParams->Zoom;
@@ -419,6 +420,11 @@ void Photino::GetDevToolsEnabled(bool* enabled)
 	settings->get_AreDevToolsEnabled((BOOL*)enabled);
 }
 
+void Photino::GetTLSCheckEnabled(bool* enabled)
+{
+	*enabled = true;
+}
+
 void Photino::GetFullScreen(bool* fullScreen)
 {
 	LONG lStyles = GetWindowLong(_hWnd, GWL_STYLE);
@@ -535,6 +541,17 @@ void Photino::SetDevToolsEnabled(bool enabled)
 	settings->put_AreDevToolsEnabled(enabled);
 	_webviewWindow->Reload();
 }
+
+void Photino::SetTLSCheckEnabled(bool enabled)
+{
+	if (enabled) {
+		EnableTLSCheck();
+	}
+	else {
+		DisableTLSCheck();
+	}
+}
+
 
 void Photino::SetFullScreen(bool fullScreen)
 {
@@ -676,11 +693,20 @@ void Photino::WaitForExit()
 	}
 }
 
+void Photino::EnableTLSCheck()
+{
+	if (!_webviewWindow)
+		return;
+
+	_tlsCheckEnabled = true;
+}
+
 void Photino::DisableTLSCheck()
 {
+	if (!_webviewWindow)
+		return;
 	// Only from webview 14 upwards - see:
 	// https://github.com/MicrosoftEdge/WebView2Samples/blob/1710d535e895ed9c24196c5482e990e10d7285c7/SampleApps/WebView2APISample/SettingsComponent.cpp#L1445
-	EventRegistrationToken m_ServerCertificateErrorToken = {};
 	auto webview14 = _webviewWindow.try_query<ICoreWebView2_14>();
 	if (webview14) {
 		webview14->add_ServerCertificateErrorDetected(
@@ -703,6 +729,7 @@ void Photino::DisableTLSCheck()
 			}
 		).Get(), &m_ServerCertificateErrorToken);
 	}
+	_tlsCheckEnabled = false;
 }
 
 
@@ -857,6 +884,9 @@ void Photino::AttachWebView()
 
 						if (_devToolsEnabled == false)
 							SetDevToolsEnabled(false);
+
+						if (_tlsCheckEnabled == false)
+							SetTLSCheckEnabled(false);
 
 						if (_zoom != 100)
 							SetZoom(_zoom);

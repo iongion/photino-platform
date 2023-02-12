@@ -105,9 +105,12 @@ namespace PhotinoNET
 		
 		///<summary>OPTIONAL: If true, user can access the browser control's dev tools. Default is true.</summary>
 		[MarshalAs(UnmanagedType.I1)] internal bool DevToolsEnabled;
-		
-		///<summary>OPTIONAL: If true, native browser control covers the entire screen. Useful for kiosks for example. Incompatible with Maximized and Minimized. Default is false.</summary>
-		[MarshalAs(UnmanagedType.I1)] internal bool FullScreen;
+
+        ///<summary>OPTIONAL: If true, browser validates SSL certificates. Default is true.</summary>
+        [MarshalAs(UnmanagedType.I1)] internal bool TLSCheckEnabled;
+
+        ///<summary>OPTIONAL: If true, native browser control covers the entire screen. Useful for kiosks for example. Incompatible with Maximized and Minimized. Default is false.</summary>
+        [MarshalAs(UnmanagedType.I1)] internal bool FullScreen;
 		
 		///<summary>OPTIONAL: If true, native window is maximized to fill the screen. Incompatible with Minimized and FullScreen. Default is false.</summary>
 		[MarshalAs(UnmanagedType.I1)] internal bool Maximized;

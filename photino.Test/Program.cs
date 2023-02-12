@@ -83,7 +83,6 @@ namespace PhotinoNET
 
                 .SetLogVerbosity(_logEvents ? 2 : 0);
 
-            mainWindow.DisableTLSCheck();
             mainWindow.WaitForClose();
 
             mainWindow.Center(); //will never happen - this is blocking.
@@ -103,6 +102,8 @@ namespace PhotinoNET
                 StartUrl = "wwwroot/main.html",
                 //StartString = "<h1>Hello Photino!</h1>",
 
+                TLSCheckEnabled = false,
+
                 //Centered = true,
                 //Chromeless = true,
                 //FullScreen = true,
@@ -114,11 +115,12 @@ namespace PhotinoNET
                 UseOsDefaultSize = false,
                 //Zoom = 300,
 
-                //ContextMenuEnabled = false,
+                ContextMenuEnabled = false,
                 //DevToolsEnabled = false,
                 //GrantBrowserPermissions = false,
 
-                //CenterOnInitialize = true,
+                Centered = true,
+                // CenterOnInitialize = true,
                 //Size = new Size(800, 600),
                 Height = 600,
                 Width = 800,

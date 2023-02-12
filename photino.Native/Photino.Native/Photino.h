@@ -89,6 +89,7 @@ struct PhotinoInitParams
 	bool Chromeless;
 	bool ContextMenuEnabled;
 	bool DevToolsEnabled;
+	bool TSLCheckEnabled;
 	bool FullScreen;
 	bool Maximized;
 	bool Minimized;
@@ -126,7 +127,10 @@ private:
 
 	Photino *_parent;
 	void Show();
+	void EnableTLSCheck();
+	void DisableTLSCheck();
 #ifdef _WIN32
+	EventRegistrationToken m_ServerCertificateErrorToken = {};
 	static HINSTANCE _hInstance;
 	HWND _hWnd;
 	WinToastHandler *_toastHandler;
@@ -154,6 +158,7 @@ private:
 
 public:
 	bool _contextMenuEnabled;
+	bool _tlsCheckEnabled;
 	bool _devToolsEnabled;
 	bool _grantBrowserPermissions;
 
@@ -180,6 +185,8 @@ public:
 	void ClearBrowserAutoFill();
 	void Close();
 
+	void GetTLSCheckEnabled(bool* enabled);
+
 	void GetContextMenuEnabled(bool *enabled);
 	void GetDevToolsEnabled(bool *enabled);
 	void GetFullScreen(bool *fullScreen);
@@ -200,6 +207,7 @@ public:
 	void Restore(); //required anymore?backward compat?
 	void SendWebMessage(AutoString message);
 
+	void SetTLSCheckEnabled(bool enabled);
 	void SetContextMenuEnabled(bool enabled);
 	void SetDevToolsEnabled(bool enabled);
 	void SetFullScreen(bool fullScreen);
@@ -217,8 +225,6 @@ public:
 	void ShowMessage(AutoString title, AutoString body, unsigned int type);
 	void ShowNotification(AutoString title, AutoString message);
 	void WaitForExit();
-
-	void DisableTLSCheck();
 
 	//Callbacks
 	void AddCustomSchemeName(AutoString scheme) { _customSchemeNames.push_back((AutoString)scheme); };

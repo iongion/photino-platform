@@ -272,6 +272,11 @@ void Photino::GetDevToolsEnabled(bool* enabled)
     if (_devToolsEnabled) *enabled = true;
 }
 
+void Photino::GetTLSCheckEnabled(bool* enabled)
+{
+	if (_tlsCheckEnabled) *enabled = true;
+}
+
 void Photino::GetFullScreen(bool* fullScreen)
 {
 	*fullScreen = _isFullScreen;
@@ -441,6 +446,15 @@ void Photino::SetDevToolsEnabled(bool enabled)
 	webkit_settings_set_enable_developer_extras(settings, _devToolsEnabled);
 }
 
+void Photino::SetTLSCheckEnabled(bool enabled)
+{
+	_tlsCheckEnabled = enabled;
+	if (enabled)
+		EnableTLSCheck();
+	else
+		DisableTLSCheck();
+}
+
 void Photino::SetFullScreen(bool fullScreen)
 {
 	if (fullScreen)
@@ -554,6 +568,12 @@ void Photino::DisableTLSCheck()
   webkit_website_data_manager_set_tls_errors_policy(data_manager, WEBKIT_TLS_ERRORS_POLICY_IGNORE);
 }
 
+void Photino::EnableTLSCheck()
+{
+	auto web_context = webkit_web_context_get_default();
+	auto data_manager = webkit_web_context_get_website_data_manager(web_context);
+	webkit_website_data_manager_set_tls_errors_policy(data_manager, WEBKIT_TLS_ERRORS_POLICY_FAIL);
+}
 
 
 
